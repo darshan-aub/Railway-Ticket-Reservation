@@ -15,9 +15,9 @@ pipeline {
                 echo 'Starting application build'
 
                 sh '''
-                test -f index.html || exit 1
-                test -f style.css || exit 1
-                test -f script.js || exit 1
+                test -f Railway-Ticket-reservation/index.html || exit 1
+                test -f Railway-Ticket-reservation/style.css || exit 1
+                test -f Railway-Ticket-reservation/script.js || exit 1
                 echo "Application files verified successfully"
                 '''
             }
@@ -28,10 +28,9 @@ pipeline {
                 echo 'Testing application files'
 
                 sh '''
-                grep -qi "<html" index.html || exit 1
-                grep -qi "bookingForm" index.html || exit 1
-                grep -qi "addEventListener" script.js || exit 1
-
+                grep -q "<html" Railway-Ticket-reservation/index.html || exit 1
+                grep -q "bookingForm" Railway-Ticket-reservation/index.html || exit 1
+                grep -q "addEventListener" Railway-Ticket-reservation/script.js || exit 1
                 echo "All basic validation tests passed"
                 '''
             }
@@ -43,7 +42,7 @@ pipeline {
 
                 sh '''
                 rm -f railway-reservation.zip
-                zip railway-reservation.zip index.html style.css script.js
+                zip -r railway-reservation.zip Railway-Ticket-reservation/index.html Railway-Ticket-reservation/style.css Railway-Ticket-reservation/script.js
                 '''
             }
         }
